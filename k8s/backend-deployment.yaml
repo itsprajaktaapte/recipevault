@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: recipevault
+spec:
+  replicas: 1                    # how many copies to run (like desiredCount in ECS)
+  selector:
+    matchLabels:
+      app: backend               # this deployment manages pods with label app=backend
+  template:
+    metadata:
+      labels:
+        app: backend             # label on the pod
+    spec:
+      containers:
+        - name: backend
+          image: recipevaultacr.azurecr.io/recipevault-backend:latest  # from ACR
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              value: "5000"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
