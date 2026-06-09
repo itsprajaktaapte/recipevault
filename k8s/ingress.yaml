@@ -4,20 +4,20 @@ metadata:
   name: recipevault-ingress
   namespace: recipevault
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
-  ingressClassName: nginx        # use nginx ingress controller
+  ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /api            # /api/* → goes to backend (same as your ALB rule)
+          - path: /api
             pathType: Prefix
             backend:
               service:
                 name: backend-service
                 port:
                   number: 5000
-          - path: /               # /* → goes to frontend
+          - path: /
             pathType: Prefix
             backend:
               service:

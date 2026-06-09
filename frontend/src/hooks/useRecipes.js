@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL || "";
 
 const useRecipes = () => {
   const [recipes, setRecipes] = useState([]);
